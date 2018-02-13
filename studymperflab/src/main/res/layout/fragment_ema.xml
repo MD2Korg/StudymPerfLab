@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.82"
         android:background="@color/backGroundDark"
         android:orientation="vertical"
         android:weightSum="1">
@@ -138,7 +138,7 @@
                     android:layout_weight="0.2"
                     android:textSize="16dp"
                     app:bootstrapBrand="success"
-                    app:bootstrapText="Are you feeling anger/frustration?	?" />
+                    app:bootstrapText="Are you feeling anger/frustration?" />
 
                 <RadioGroup
                     android:id="@+id/radio_anger"
@@ -518,11 +518,11 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="1">
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/btn_work_save"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:layout_marginRight="10dp"
@@ -535,25 +535,8 @@
             </LinearLayout><!--stop button -->
 
             <!--interupt button -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5">
 
-                <com.beardedhen.androidbootstrap.BootstrapButton
-                    android:id="@+id/btn_work_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.5"
-                    app:bootstrapBrand="success"
-                    app:bootstrapSize="md"
-                    app:bootstrapText="{fa_ban} Cancel"
-                    app:buttonMode="regular"
-                    app:roundedCorners="true"
-                    app:showOutline="false" />
 
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

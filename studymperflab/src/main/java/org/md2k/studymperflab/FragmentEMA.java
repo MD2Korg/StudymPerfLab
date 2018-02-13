@@ -28,15 +28,23 @@ public class FragmentEMA extends Fragment {
     View view;
     FancyButton fancyButtonBack;
     ActivityMain activityMain;
-    RadioGroup radioGroupTypingTask;
-    RadioGroup radioGroupTypingStatus;
+    RadioGroup radioGroupStress;
+    RadioGroup radioGroupAnger;
+    RadioGroup radioGroupHappy;
+    RadioGroup radioGroupCheerful;
+    RadioGroup radioGroupSad;
     private BootstrapButton buttonSave;
-    private BootstrapButton buttonCancel;
+   // private BootstrapButton buttonCancel;
     private BootstrapButton buttonAdd;
     private EditText editTextNote;
 
-    String typing_task;
-    String typing_status;
+
+    String string_stress_answer;
+    String string_anger_answer;
+    String string_happy_answer;
+    String string_cheerful_answer;
+    String string_sad_answer;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,44 +57,49 @@ public class FragmentEMA extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         activityMain = (ActivityMain) getActivity();
         fancyButtonBack = (FancyButton) view.findViewById(R.id.button_back);
-        radioGroupTypingTask = (RadioGroup) view.findViewById(R.id.radio_typing_task);
-        radioGroupTypingStatus = (RadioGroup) view.findViewById(R.id.radio_typing_status);
+
+        radioGroupStress = (RadioGroup) view.findViewById(R.id.radio_stress);
+        radioGroupAnger = (RadioGroup) view.findViewById(R.id.radio_anger);
+        radioGroupHappy = (RadioGroup) view.findViewById(R.id.radio_happy);
+        radioGroupCheerful = (RadioGroup) view.findViewById(R.id.radio_cheerful);
+        radioGroupSad = (RadioGroup) view.findViewById(R.id.radio_sad);
+
         buttonSave = (BootstrapButton) view.findViewById(R.id.btn_work_save);
-        buttonCancel = (BootstrapButton) view.findViewById(R.id.btn_work_cancel);
+      //  buttonCancel = (BootstrapButton) view.findViewById(R.id.btn_work_cancel);
         fancyButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(activityMain.started==true){
+                if (activityMain.started == true) {
                     Toasty.normal(getContext(), "Please stop the session first", Toast.LENGTH_SHORT).show();
 
-                }else
+                } else
                     activityMain.loadWorkType();
             }
         });
         editTextNote = (EditText) view.findViewById(R.id.editView_notes);
         buttonAdd = (BootstrapButton) view.findViewById(R.id.btn_work_add);
 
-        prepareCancel(view);
+    //    prepareCancel(view);
         prepareSave(view);
-       // prepareFinish(view);
-        prepareInterupt(view);
         prepareNoteAdd();
-        enableButtons(true, false, false);
+    //    enableButtons(true, false, false);
 
 
         //   radioGroupTypingTask = (RadioGroup) view.findViewById(R.id.radio_typing_task);
 
 
     }
+
     void prepareNoteAdd() {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextNote.getText()==null || editTextNote.getText().toString().length()==0) return;
-                String work_status= activityMain.workType+ ","+"note,"+editTextNote.getText().toString();
+                if (editTextNote.getText() == null || editTextNote.getText().toString().length() == 0)
+                    return;
+                String work_status = activityMain.workType + "," + "note," + editTextNote.getText().toString();
                 editTextNote.setText("");
                 try {
-                    DataKitAPI.getInstance(getActivity()).insert(((ActivityMain)getActivity()).dataSourceClient, new DataTypeString(DateTime.getDateTime(), work_status));
+                    DataKitAPI.getInstance(getActivity()).insert(((ActivityMain) getActivity()).dataSourceClient, new DataTypeString(DateTime.getDateTime(), work_status));
                 } catch (DataKitException e) {
                 }
                 Toasty.normal(getContext(), "Note added", Toast.LENGTH_SHORT).show();
@@ -109,97 +122,128 @@ public class FragmentEMA extends Fragment {
                 //  writeSharedPreference();
                 //      handler.removeCallbacks(runnable);
                 //    handler.post(runnable);
-                if(check()==true) {
-                    activityMain.started=true;
-                    String work_status = activityMain.workType + "," + typing_task + "," + typing_status + "," + "start";
-                    Toasty.normal(getContext(), work_status, Toast.LENGTH_SHORT).show();
-                    enableButtons(false, true, false);
-                }
+                if (check() == true) {
 
-
-            }
-        });
-    }
-
-    //TODO button interupt active
-    void prepareInterupt(View view) {
-//        buttonInterrupt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    DataKitAPI.getInstance(getActivity()).insert(((ActivityMain)getActivity()).dataSourceClient, new DataTypeString(DateTime.getDateTime(), activityMain.workType+","+"interrupted"));
-//                } catch (DataKitException e) {
-//                }
-//                Toasty.normal(getContext(), "Interrupted...", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-    }
-
-
-
-
-    private void prepareCancel(View view) {
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //   workAnnotation.operation="CANCEL";
-                //   workAnnotation.timestamp=DateTime.getDateTime();
-                //   insertData();
-                //   writeSharedPreference();
-                //   handler.removeCallbacks(runnable);
-                if(check()==true) {
-                    activityMain.started=false;
-                    String work_status = activityMain.workType + "," + typing_task + "," + typing_status + "," + "cancel";
+                    String work_status = activityMain.workType + "," + "stress" + "," + string_stress_answer + "," + "anger" + "," + string_anger_answer + "," + "happy" + "," + string_happy_answer + "," + "cheerful" + "," + string_cheerful_answer + "," + "sad" + "," + string_sad_answer + "," + "saved";
+                    activityMain.started = false;
                     try {
-                        DataKitAPI.getInstance(getActivity()).insert(((ActivityMain)getActivity()).dataSourceClient, new DataTypeString(DateTime.getDateTime(), work_status));
+                        DataKitAPI.getInstance(getActivity()).insert(((ActivityMain) getActivity()).dataSourceClient, new DataTypeString(DateTime.getDateTime(), work_status));
                     } catch (DataKitException e) {
                     }
                     Toasty.normal(getContext(), work_status, Toast.LENGTH_SHORT).show();
-                    enableButtons(true, false, true);
+                    //enableButtons(true, false, true);
+                   // enableButtons(false, true, false);
+
+
+//                    activityMain.started = true;
+//                    String work_status = activityMain.workType + "," + "saved";
+//                    Toasty.normal(getContext(), work_status, Toast.LENGTH_SHORT).show();
+//                    enableButtons(false, true, false);
+//                }
+
+
                 }
-                //     showMessage("CANCELLED");
             }
         });
-    }
+        }
 
 
-    void enableButtons(boolean st, boolean sp, boolean wt) {
-        buttonSave.setEnabled(st);
-        buttonSave.setShowOutline(!st);
 
-        buttonCancel.setEnabled(sp);
-        buttonCancel.setShowOutline(!sp);
-        //TODO button interupt active
-        //buttonInterrupt.setEnabled(sp);
-        //buttonInterrupt.setShowOutline(!sp);
-        //   other_activity.setEnabled(wt);
-        //  other_context.setEnabled(wt);
-        //  select_activity.setEnabled(wt);
-        //  select_context.setEnabled(wt);
-    }
+
+
+
+//    private void prepareCancel(View view) {
+//        buttonCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //   workAnnotation.operation="CANCEL";
+//                //   workAnnotation.timestamp=DateTime.getDateTime();
+//                //   insertData();
+//                //   writeSharedPreference();
+//                //   handler.removeCallbacks(runnable);
+//                if (check() == true) {
+//                    activityMain.started = false;
+//                    String work_status = activityMain.workType + "," + "stress" + "," + string_stress_answer + "," + "anger" + "," + string_anger_answer + "," + "happy" + "," + string_happy_answer + "," + "cheerful" + "," + string_cheerful_answer + "," + "sad" + "," + string_sad_answer + "," + "cancel";
+//                    try {
+//                        DataKitAPI.getInstance(getActivity()).insert(((ActivityMain) getActivity()).dataSourceClient, new DataTypeString(DateTime.getDateTime(), work_status));
+//                    } catch (DataKitException e) {
+//                    }
+//                    Toasty.normal(getContext(), work_status, Toast.LENGTH_SHORT).show();
+//                    enableButtons(true, false, true);
+//                }
+//                //     showMessage("CANCELLED");
+//            }
+//        });
+//    }
+
+
+//    void enableButtons(boolean st, boolean sp, boolean wt) {
+//        buttonSave.setEnabled(st);
+//        buttonSave.setShowOutline(!st);
+//
+//   //     buttonCancel.setEnabled(sp);
+//     //   buttonCancel.setShowOutline(!sp);
+//    }
 
     boolean check() {
 
-        int selectedId = radioGroupTypingTask.getCheckedRadioButtonId();
-        int selectedstatus = radioGroupTypingStatus.getCheckedRadioButtonId();
-        if (selectedId == -1) {
-            Toasty.error(getContext(), "Please select a typing type to continue...", Toast.LENGTH_SHORT).show();
+//        int selectedId = radioGroupTypingTask.getCheckedRadioButtonId();
+        //      int selectedstatus = radioGroupTypingStatus.getCheckedRadioButtonId();
+//        if (selectedId == -1) {
+//            Toasty.error(getContext(), "Please select a typing type to continue...", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        else if (selectedstatus == -1) {
+//            Toasty.error(getContext(), "Please select a typing status to continue...", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        else  {
+////            RadioButton r_task = (RadioButton) view.findViewById(selectedId);
+//            RadioButton r_status = (RadioButton) view.findViewById(selectedstatus);
+//            typing_task = r_task.getText().toString();
+//            typing_status=r_status.getText().toString();
+//            return true;
+//        }
+//
+
+        int selected_stress_answer = radioGroupStress.getCheckedRadioButtonId();
+        int selected_anger_answer = radioGroupAnger.getCheckedRadioButtonId();
+        int selected_happy_answer = radioGroupHappy.getCheckedRadioButtonId();
+        int selected_cheerful_answer = radioGroupCheerful.getCheckedRadioButtonId();
+        int selected_sad_answer = radioGroupSad.getCheckedRadioButtonId();
+
+        if (selected_stress_answer == -1) {
+            Toasty.error(getContext(), "Please select answer for stress", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else if (selectedstatus == -1) {
-            Toasty.error(getContext(), "Please select a typing status to continue...", Toast.LENGTH_SHORT).show();
+        } else if (selected_anger_answer == -1) {
+            Toasty.error(getContext(), "Please select answer for anger/frustration", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else  {
-            RadioButton r_task = (RadioButton) view.findViewById(selectedId);
-            RadioButton r_status = (RadioButton) view.findViewById(selectedstatus);
-            typing_task = r_task.getText().toString();
-            typing_status=r_status.getText().toString();
+        } else if (selected_happy_answer == -1) {
+            Toasty.error(getContext(), "Please select answer for happy", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (selected_cheerful_answer == -1) {
+            Toasty.error(getContext(), "Please select answer for cheerful", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (selected_sad_answer == -1) {
+            Toasty.error(getContext(), "Please select answer for sad", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            RadioButton stress_answer = (RadioButton) view.findViewById(selected_stress_answer);
+            RadioButton anger_answer = (RadioButton) view.findViewById(selected_anger_answer);
+            RadioButton happy_answer = (RadioButton) view.findViewById(selected_happy_answer);
+            RadioButton cheerful_answer = (RadioButton) view.findViewById(selected_cheerful_answer);
+            RadioButton sad_answer = (RadioButton) view.findViewById(selected_sad_answer);
+
+
+            string_stress_answer = stress_answer.getText().toString();
+            string_anger_answer = anger_answer.getText().toString();
+            string_happy_answer = happy_answer.getText().toString();
+            string_cheerful_answer = cheerful_answer.getText().toString();
+            string_sad_answer = sad_answer.getText().toString();
+
+
             return true;
         }
 
-
-
-
-}
+    }
 }

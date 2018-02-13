@@ -52,6 +52,16 @@ public class FragmentSession extends Fragment{
         fancyButtonBack = (FancyButton) view.findViewById(R.id.button_back);
         textViewWorkType= (AwesomeTextView) view.findViewById(R.id.textview_work_type);
         editTextNote = (EditText) view.findViewById(R.id.textView_notes);
+        fancyButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activityMain.started == true) {
+                    Toasty.normal(getContext(), "Please stop the session first", Toast.LENGTH_SHORT).show();
+
+                } else
+                    activityMain.loadWorkType();
+            }
+        });
 
 //        textViewWorkType.setText(activityMain.workType);
 
@@ -77,6 +87,8 @@ public class FragmentSession extends Fragment{
 
 
     }
+
+
     void prepareNoteAdd() {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
