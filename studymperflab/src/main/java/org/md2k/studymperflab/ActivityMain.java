@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import org.md2k.datakitapi.source.datasource.DataSourceClient;
 import org.md2k.datakitapi.time.DateTime;
-import org.md2k.mcerebrum.core.access.studyinfo.StudyCP;
 import org.md2k.mcerebrum.system.update.Update;
 
 import es.dmoral.toasty.Toasty;
@@ -24,27 +23,28 @@ public class ActivityMain extends AbstractActivityMenu {
     boolean started = false;
     FragmentWorkType fragmentWorkType;
     FragmentTyping fragmentTyping;
-    FragmentWorkTypeStart fragmentWorkTypeStart;
     FragmentSession fragmentSession;
+    FragmentWorkTypeStart fragmentWorkTypeStart;
     FragmentManager manager;
     FragmentTransaction transaction;
     Subscription subscriptionCheckUpdate;
+    FragmentEMA fragmentEma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentWorkType=new FragmentWorkType();
         fragmentTyping=new FragmentTyping();
+        fragmentSession= new FragmentSession();
+        fragmentEma=new FragmentEMA();
         fragmentWorkTypeStart=new FragmentWorkTypeStart();
-        fragmentSession = new FragmentSession();
 
         manager=getSupportFragmentManager();//create an instance of fragment manager
 
         transaction=manager.beginTransaction();//create an instance of Fragment-transaction
-        if(StudyCP.getTitle(this).endsWith("Minnesota"))
-            transaction.replace(R.id.container_lab, fragmentWorkType, "Fragment_Work_Type");
-        else
-            transaction.replace(R.id.container_lab, fragmentSession, "Fragment_Session");
+
+
+        transaction.replace(R.id.container_lab, fragmentWorkType, "Fragment_Work_Type");
         transaction.commitNowAllowingStateLoss();
         start();
 
@@ -134,6 +134,17 @@ public void loadWorkType(){
         transaction.replace(R.id.container_lab, fragmentTyping,"Fragment_Typing");
         transaction.commit();
     }
+    public void loadEma(){
+        transaction=manager.beginTransaction();//create an instance of Fragment-transaction
+        transaction.replace(R.id.container_lab, fragmentEma,"Fragment_Typing");
+        transaction.commit();
+    }
+
+    public void loadSession(){
+                transaction=manager.beginTransaction();//create an instance of Fragment-transaction
+                transaction.replace(R.id.container_lab, fragmentSession,"Fragment_Session");
+                transaction.commit();
+            }
     public void loadWorkTypeStart(){
         transaction=manager.beginTransaction();//create an instance of Fragment-transaction
         transaction.replace(R.id.container_lab, fragmentWorkTypeStart,"Fragment_Work_Type_Start");

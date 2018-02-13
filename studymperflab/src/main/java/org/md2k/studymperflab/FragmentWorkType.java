@@ -56,7 +56,7 @@ public class FragmentWorkType extends Fragment{
                     if(r.getText().equals("Typing task")) {
                         activityMain.loadTyping();
                     }else if(r.getText().equals("EMA")) {
-                        //TODO CALL loadEMA
+
                          activityMain.loadEma();
                     }
                     else{
