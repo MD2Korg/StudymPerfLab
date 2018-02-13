@@ -60,7 +60,9 @@ public class FragmentWorkType extends Fragment{
                          activityMain.loadEma();
                     }
                     else{
-                        activityMain.loadSession();
+                     //   activityMain.loadSession();
+                        activityMain.loadWorkTypeStart();
+
                     }
                 }
             }

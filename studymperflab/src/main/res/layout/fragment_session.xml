@@ -28,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:weightSum="1"
         android:background="@color/backGroundDark"
@@ -193,29 +193,6 @@
 
         </LinearLayout>
     </LinearLayout>
-    </LinearLayout>
-
-    <!--close button -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/backGroundDark"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.1">
-
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/button_back"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            fancy:fb_borderColor="@color/tealsecondary"
-            fancy:fb_borderWidth="0dp"
-            fancy:fb_defaultColor="@color/backGroundDark"
-            fancy:fb_fontIconResource="&#xf0a8;"
-            fancy:fb_radius="10dp"
-            fancy:fb_text="Back"
-            fancy:fb_textColor="#ff00"
-            fancy:fb_textSize="16sp" />
     </LinearLayout>
 
 
