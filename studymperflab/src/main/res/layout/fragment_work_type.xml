@@ -184,6 +184,17 @@
                     android:text="Participant drinks water or other beverage"
                     android:textColor="#ffff"
                      />
+
+                <RadioButton
+                    android:id="@+id/radio_ema"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:buttonTint="@color/tealsecondary"
+
+                    android:text="EMA"
+                    android:textColor="#ffff"
+                    />
             </RadioGroup>
         </LinearLayout>
         </ScrollView>
