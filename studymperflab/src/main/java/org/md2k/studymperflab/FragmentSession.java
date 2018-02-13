@@ -77,6 +77,8 @@ public class FragmentSession extends Fragment{
 
 
     }
+
+
     void prepareNoteAdd() {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
