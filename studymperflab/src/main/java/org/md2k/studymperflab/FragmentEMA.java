@@ -44,7 +44,11 @@ public class FragmentEMA extends Fragment {
     String string_happy_answer;
     String string_cheerful_answer;
     String string_sad_answer;
-
+    int selected_stress_answer;
+    int selected_anger_answer;
+    int selected_happy_answer;
+    int selected_cheerful_answer;
+    int selected_sad_answer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,6 +93,16 @@ public class FragmentEMA extends Fragment {
 
 
     }
+    @Override
+    public void onResume(){
+        radioGroupStress.clearCheck();
+        radioGroupSad.clearCheck();
+        radioGroupCheerful.clearCheck();
+        radioGroupHappy.clearCheck();
+        radioGroupAnger.clearCheck();
+        editTextNote.setText("");
+        super.onResume();
+    }
 
     void prepareNoteAdd() {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +145,8 @@ public class FragmentEMA extends Fragment {
                     } catch (DataKitException e) {
                     }
                     Toasty.normal(getContext(), work_status, Toast.LENGTH_SHORT).show();
+                //TODO
+                    //    resetRadio();
                     //enableButtons(true, false, true);
                    // enableButtons(false, true, false);
 
@@ -206,11 +222,11 @@ public class FragmentEMA extends Fragment {
 //        }
 //
 
-        int selected_stress_answer = radioGroupStress.getCheckedRadioButtonId();
-        int selected_anger_answer = radioGroupAnger.getCheckedRadioButtonId();
-        int selected_happy_answer = radioGroupHappy.getCheckedRadioButtonId();
-        int selected_cheerful_answer = radioGroupCheerful.getCheckedRadioButtonId();
-        int selected_sad_answer = radioGroupSad.getCheckedRadioButtonId();
+        selected_stress_answer = radioGroupStress.getCheckedRadioButtonId();
+        selected_anger_answer = radioGroupAnger.getCheckedRadioButtonId();
+        selected_happy_answer = radioGroupHappy.getCheckedRadioButtonId();
+        selected_cheerful_answer = radioGroupCheerful.getCheckedRadioButtonId();
+        selected_sad_answer = radioGroupSad.getCheckedRadioButtonId();
 
         if (selected_stress_answer == -1) {
             Toasty.error(getContext(), "Please select answer for stress", Toast.LENGTH_SHORT).show();
@@ -244,6 +260,10 @@ public class FragmentEMA extends Fragment {
 
             return true;
         }
+    }
+void resetRadio(){
+  //  radioGroupStress.setChecked(false);
 
     }
+
 }
