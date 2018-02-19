@@ -69,7 +69,12 @@ public class FragmentWorkTypeStart extends Fragment{
         enableButtons(true, false, false);
 
     }
+    @Override
+    public void onResume(){
 
+        editTextNote.setText("");
+        super.onResume();
+    }
 
     void prepareStart() {
         buttonStart.setOnClickListener(new View.OnClickListener() {

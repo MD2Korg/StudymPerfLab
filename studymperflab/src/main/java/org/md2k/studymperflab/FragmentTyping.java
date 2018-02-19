@@ -80,6 +80,13 @@ public class FragmentTyping extends Fragment {
 
 
     }
+    @Override
+    public void onResume(){
+        radioGroupTypingStatus.clearCheck();
+        radioGroupTypingTask.clearCheck();
+        editTextNote.setText("");
+        super.onResume();
+    }
     void prepareNoteAdd() {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
